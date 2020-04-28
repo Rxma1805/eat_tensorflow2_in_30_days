@@ -17,9 +17,9 @@
 
 其中通过Numpy array, Pandas DataFrame, 文件路径构建数据管道是最常用的方法。
 
-通过tfrecords文件方式构建数据管道较为复杂，需要对样本构建tf.Example后压缩成字符串写到tfrecoreds文件，读取后再解析成tf.Example。
+通过tfrecords文件方式构建数据管道较为复杂，需要对样本构建tf.Example后压缩成字符串写到tfrecords文件，读取后再解析成tf.Example。
 
-但tfrecoreds文件的优点是压缩后文件较小，便于网络传播，加载速度较快。
+但tfrecords文件的优点是压缩后文件较小，便于网络传播，加载速度较快。
 
 
 **1,从Numpy array构建数据管道**
@@ -630,7 +630,7 @@ list(ds_take.as_numpy_iterator())
 
 * 2，使用 interleave 方法可以让数据读取过程多进程执行,并将不同来源数据夹在一起。
 
-* 3，使用 map 时设置num_parallel_calls 让数据转换过程多进行执行。
+* 3，使用 map 时设置num_parallel_calls 让数据转换过程多进程执行。
 
 * 4，使用 cache 方法让数据在第一个epoch后缓存到内存中，仅限于数据集不大情形。
 
@@ -689,7 +689,7 @@ def train_step():
 ```
 
 ```python
-# 训练过程预计耗时 10*2+10*1+ = 30s
+# 训练过程预计耗时 10*2+10*1 = 30s
 printbar()
 tf.print(tf.constant("start training..."))
 for x in ds:
@@ -898,6 +898,8 @@ tf.print(tf.constant("end vector transformation..."))
 ```
 
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
+
+也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
 
 ![image.png](./data/Python与算法之美logo.jpg)
 
